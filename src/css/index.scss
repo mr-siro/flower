@@ -1,0 +1,48 @@
+@mixin background($colour1, $colour2) {
+  background: -webkit-linear-gradient($colour1, $colour2);
+  background: -moz-linear-gradient($colour1, $colour2);
+  background: -ms-linear-gradient($colour1, $colour2);
+  background: -o-linear-gradient($colour1, $colour2);
+  background: linear-gradient($colour1, $colour2);
+}
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -o-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin rotate($degrees) {
+  -webkit-transform: rotate($degrees);
+  -moz-transform: rotate($degrees);
+  -ms-transform: rotate($degrees);
+  -o-transform: rotate($degrees);
+  transform: rotate($degrees);
+}
+@mixin scale($points) {
+  -webkit-transform: scale($points);
+  -moz-transform: scale($points);
+  -ms-transform: scale($points);
+  -o-transform: scale($points);
+  transform: scale($points);
+}
+@mixin fadeIn($seconds) {
+  -webkit-animation: fadein $seconds;
+  -moz-animation: fadein $seconds;
+  -ms-animation: fadein $seconds;
+  -o-animation: fadein $seconds;
+  animation: fadein $seconds;
+}
+
+$white: #FFFFFF;
+$skyLight: #55C1FF;
+$skyDark: #33658A;
+$sunLight: #FEC601;
+$sunDark: #EA7317;
+$cloudLight: #DBE4EE;
+$cloudDark: #A9BBCF;
+$darkCloudLight: #90A7BF;
+$darkCloudDark: #7792AF;
+$raindrop: #0A81D1;
+$nightLight: #ECE4B7;
+$nightDark: #BFADA3;
