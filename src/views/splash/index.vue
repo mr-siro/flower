@@ -9,7 +9,7 @@
       <div class="login">
         <div class="form">
           <label>
-            <input @blur="valid_email" v-model="loginForm.email" type="text" placeholder="enter email"/>
+            <input @blur="valid_email" v-model="loginForm.email" type="email" placeholder="enter email"/>
           </label>
           <div class="callback">
             <p>{{ rules.email }}</p>
