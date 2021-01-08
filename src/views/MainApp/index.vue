@@ -4,7 +4,6 @@
       <strong style="margin-right: 10px">Lv {{ lv }}</strong>
       <Progress :percentage="point"/>
     </div>
-
     <div class="main-content">
       <div class="weather">
         <div>
@@ -19,9 +18,13 @@
 
       </div>
 
+    </div>
+    <div class="footer">
+      <Fab></Fab>
+
       <div v-if="astimate" class="footer-content">
         <span v-if="drop" class="increment">+{{ incrementPoint }}</span>
-        <img id="btn-cursor" alt="#" src="@/assets/icons/cursor.png"/>
+        <img v-if="!wattering" id="btn-cursor" alt="#" src="@/assets/icons/cursor.png"/>
         <div style="float: right;; width: 40px">
           <img
               @click="onWattering"
@@ -35,7 +38,7 @@
       </div>
       <div v-else class="footer-counter">
         <vue-countdown-timer
-            style="margin-top: 0.6rem"
+
             @end_callback="endCallBack('event ended')"
             :start-time="startTime"
             :end-time="endTime"
@@ -47,15 +50,17 @@
             :seconds-txt="'s'">
         </vue-countdown-timer>
       </div>
-
     </div>
-    <Modal @close="dialogVisible = false" @confirm="dialogVisible = false" :modal-visible="dialogVisible">
+    <Modal @close="dialogVisible = false" :modal-visible="dialogVisible">
       <span slot="header" style="text-align: center; display: block"
       >Cây của bạn đã lên lv
         {{ lv }}</span
       >
       <div slot="body">
         <img class="tree" alt="#" :src="treeSrc"/>
+      </div>
+      <div slot="footer">
+        <button class="modal-default-button btn-2" @click="dialogVisible = false">OK</button>
       </div>
     </Modal>
   </div>
@@ -64,10 +69,11 @@
 <script>
 import Progress from '@/components/Progress'
 import {Images} from "@/assets/Images";
-
+import Fab from "@/components/button/Fab";
 export default {
   components: {
-    Progress
+    Progress,
+    Fab
   },
   data() {
     return {
@@ -79,7 +85,7 @@ export default {
       astimate: false,
       startTime: 0,
       endTime: 0,
-      incrementPoint: 50
+      incrementPoint: 10
     };
   },
   computed: {
@@ -173,11 +179,7 @@ export default {
     .weather {
       display: block;
       position: relative;
-      width: 200px;
-      min-width: 200px;
-      transform: rotate(45deg);
-      float: right;
-      bottom: 3rem;
+      transform: rotate(35deg);
       z-index: 10;
 
       .raindrop {
@@ -200,55 +202,56 @@ export default {
 
     .flow-wrap {
       position: relative;
+      margin-top: 55%;
     }
 
-    .footer-counter {
-      background-image: url("../../assets/images/board.png");
-      width: 150px;
-      height: 80px;
-      position: relative;
-      margin-bottom: 1rem;
-      background-size: cover;
-      background-position: center;
-      transition: .4s linear;
-      float: right;
-      text-align: center;
-      color: #FFFFFF;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .footer-content {
-
-      margin-bottom: 1rem;
-      width: 150px;
-      transition: .4s linear;
-      float: right;
-
-      #btn-cursor {
-        width: 40px;
-        position: relative;
-        animation: mymove 1s infinite;
-        animation-timing-function: linear;
-        float: left;
-      }
-
-      .btn-can {
-        width: 40px;
-        cursor: pointer;
-        position: relative;
-      }
-
-      .btn-can-active {
-        width: 40px;
-        cursor: pointer;
-        position: relative;
-        animation: bt_to_top 5s;
-      }
-    }
   }
 }
+.footer-content {
+  width: 150px;
+  transition: .4s ease-in-out;
+  margin-bottom: 1rem;
 
+  #btn-cursor {
+    width: 40px;
+    position: relative;
+    animation: mymove 1s infinite;
+    animation-timing-function: linear;
+    float: left;
+  }
+
+  .btn-can {
+    width: 40px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .btn-can-active {
+    width: 40px;
+    cursor: pointer;
+    position: relative;
+    animation: bt_to_top 5s;
+  }
+}
+.footer-counter {
+  border: 2px solid;
+  padding: 5px;
+  border-radius: 10px;
+  position: relative;
+  transition: .4s linear;
+  text-align: center;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #C5834C;
+}
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+}
 .increment {
   position: relative;
   animation: plus 3s;
@@ -291,21 +294,21 @@ export default {
 
 @keyframes raindrop {
   from {
-    top: 0;
+    top: 3rem;
 
   }
   to {
-    top: 175px;
+    top: 15rem;
 
   }
 }
 
 @keyframes raindropAlt {
   from {
-    top: 0;
+    top: 3rem;
   }
   to {
-    top: 150px;
+    top: 12rem;
   }
 }
 
@@ -323,12 +326,12 @@ export default {
     bottom: 0;
   }
   50% {
-    bottom: 400px;
+    bottom: 28rem;
     transform: rotate(-100deg);
   }
 
   70% {
-    bottom: 200px;
+    bottom: 12.5rem;
   }
   100% {
     bottom: 0;

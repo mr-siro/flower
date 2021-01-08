@@ -22,7 +22,6 @@
           <div class="modal-footer">
             <slot name="footer">
 <!--              default footer-->
-              <button class="modal-default-button btn-2" @click="confirm">{{titleClose}}</button>
             </slot>
           </div>
         </div>
@@ -45,21 +44,13 @@ props:{
   height:{
     type: String | Number,
     default: '300px'
-  },
-  titleClose:{
-    type:String,
-    default:'OK'
   }
 },
 
   methods:{
   closeModal()  {
     this.$emit('close')
-  },
-
-    confirm() {
-    this.$emit('confirm')
-    }
+  }
   }
 }
 </script>

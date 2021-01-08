@@ -26,15 +26,22 @@
       </div>
       <button @click="dialogVisible = true" class="register">Register</button>
     </div>
-    <Modal @close="dialogVisible = false" @confirm="dialogVisible = false" title-close="Register"
-           :modal-visible="dialogVisible"></Modal>
+    <Modal @close="dialogVisible = false"
+           :modal-visible="dialogVisible">
+      <div slot="body">
+
+      </div>
+      <div slot="footer">
+        <button class="modal-default-button btn-2" @click="dialogVisible = false">Register</button>
+      </div>
+    </Modal>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import emailRegex from '@/utils/regex'
-
+import Auth from "@/utils/auth";
 export default {
   data() {
     return {
@@ -61,6 +68,7 @@ export default {
         this.loading = true
         axios.post('https://vnsapi.herokuapp.com/signin', this.loginForm).then((res) => {
           console.log(res.data)
+          Auth.setToken(res.data.token)
           this.$message({
             message: 'Success',
             type: 'success'

@@ -4,16 +4,15 @@
     <div class="container">
       <MainApp v-if="loaded"/>
       <Splash v-else @success="onSuccess" @error="onFailed"/>
-
     </div>
 
   </div>
 </template>
-
 <script>
 
 import MainApp from "@/views/MainApp";
 import Splash from "@/views/splash";
+import Auth from "@/utils/auth";
 
 export default {
   name: "App",
@@ -23,10 +22,17 @@ export default {
   },
   data() {
     return {
-      loaded: false
+      loaded: false,
+      token: null
     };
   },
 
+  mounted() {
+    this.token = Auth.getToken()
+    if (Auth.getToken()) {
+      this.loaded = true
+    }
+  },
   methods: {
     onSuccess() {
       this.loaded = true
